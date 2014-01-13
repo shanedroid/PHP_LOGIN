@@ -7,10 +7,9 @@ class DB {
 			$_results,
 			$_count = 0;
 
-	private function _construct() {
+	private function __construct() {
 		try {
 			$this->_pdo = new PDO('mysql:host='.Config::get('mysql/host').';dbname='.Config::get('mysql/db'),Config::get('mysql/username'),Config::get('mysql/password'));
-
 		} catch(PDOException $e) {
 			die($e->getMessage());
 		}
@@ -28,22 +27,23 @@ class DB {
 		if($this->_query = $this->_pdo->prepare($sql)) {
 			$i = 1;
 			if(count($params)) {
-				foreach($params as $param) {
-					$this->_query->bindValue($i, $param);
-					$i++;
-				}
-			}
+			   	foreach($params as $param) {
+			 		$this->_query->bindValue($i, $param);
+			 		$i++;
+			 	}
+			}	 
 			if($this->_query->execute()) {
 				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
 				$this->_count = $this->_query->rowCount();
 			} else {$this->_error = true;}
 		}
+
 		return $this;
 	}
 
 	public function action($action, $table, $where = array()) {
 		if (count($where) == 3) {
-			$operators == array ('=','>','<','>=','<=','');
+			$operators = array('=','>','<','>=','<=',);
 
 			$field    = $where[0]; 
 			$operator = $where[1];
@@ -53,7 +53,7 @@ class DB {
 			if (in_array($operator, $operators)){
 				$sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
 				//bind data if there is no errors with the query
-				if (!$this->query($sql, array($value))->_error()) {return $this;}
+				if (!$this->query($sql, array($value))->error()) {return $this;}
 			}
 		}
 		return false;
@@ -81,7 +81,7 @@ class DB {
 
 		$sql = "INSERT INTO {$table} (`".implode('`, `', $keys)."`) VALUES ({$values}) ";
 
-		if (!$this->query($sql, $fields)->_error()) {return true;}
+		if (!$this->query($sql, $fields)->error()) {return true;}
 	
 		return false;
 	}
@@ -97,7 +97,7 @@ class DB {
 		}
 		$sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
 
-		if(!$this->query($sql, $fields)->_error()) {return true;}
+		if(!$this->query($sql, $fields)->_error) {return true;}
 		return false;
 	}
 
@@ -110,9 +110,9 @@ class DB {
 	}
 
 	public function first () {
-		return $this->_results()[0];
+		$results = $this->results();
+		return $results[0];
 	}
-
 
 
 	public function error() {

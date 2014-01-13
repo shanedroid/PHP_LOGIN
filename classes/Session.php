@@ -1,5 +1,8 @@
 <?php
 class Session {
+
+	private $_errors = array(); 
+
 	public static function exists($name) {
 		return (isset($_SESSION[$name])) ? true : false;
 	}
@@ -21,8 +24,12 @@ class Session {
 			$session = self::get($name);
 			self::delete($name);
 			return $session;
-		} else {self::put($name, $string)}
+		} else {self::put($name, $string);}
 		//return '';
+	}
+
+	public static function addError($error = array()) {
+		$this->_errors = $error;
 	}
 }
 ?>

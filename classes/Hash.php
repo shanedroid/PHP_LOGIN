@@ -4,7 +4,7 @@ class Hash {
 		return hash('sha256', $string . $salt);
 	}
 
-	public function salt($length) {
+	public static function salt($length) {
 		return mcrypt_create_iv($length); 
 	}
 
