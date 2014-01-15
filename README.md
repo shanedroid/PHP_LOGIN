@@ -15,4 +15,4 @@ Most importantly I followed this guide and wathced the videos from PHPacademy an
 
 https://phpacademy.org/videos/oop-loginregister-system
 
-I woul dencourage anyone interested in learning PHP to check out their site it was very helpful and fun too!
+I would encourage anyone interested in learning PHP to check out their site it was very helpful and fun too!
