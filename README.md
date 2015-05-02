@@ -1,7 +1,7 @@
 PHP_LOGIN
 =========
 
-PHP Login taht I used to help me learn PHP, inspired by the PHP-Login project (which is amazing btw) here:
+PHP Login that I used to help me learn PHP, inspired by the PHP-Login project (which is amazing btw) here:
 
 https://github.com/panique/php-login
 
