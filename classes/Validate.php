@@ -10,7 +10,7 @@ class Validate {
 
 	public function check($source, $items = array()) {
 		foreach ($items as $item => $rules) {
-			foreach ($rules as $rule => $value) {
+			foreach ($rules as $rule => $rule_value) {
 
 				$value = trim($source[$item]);
 				$item = escape($item);
@@ -45,7 +45,7 @@ class Validate {
 		return $this;
 	}
 
-	private function addError() {
+	private function addError($error) {
 		$this->_errors[] = $error;
 	}
 
